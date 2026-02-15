@@ -1,0 +1,240 @@
+-- ADVANCED THEME SYSTEM (Initial Startup Configuration)
+local StartupTheme = {
+    MainBG = Color3.fromRGB(30, 30, 30),
+    MenuBarBG = Color3.fromRGB(26, 26, 27), 
+    DisplayBG = Color3.fromRGB(20, 20, 20),
+    TitleBarBG = Color3.fromRGB(40, 40, 40),
+    ActiveTab = Color3.fromRGB(50, 50, 50),
+    InactiveTab = Color3.fromRGB(40, 40, 40),
+    ElementBG = Color3.fromRGB(35, 35, 35),
+    TextColor = Color3.fromRGB(255, 255, 255),
+    ToggleTrue = Color3.fromRGB(0, 255, 109),
+    SliderFill = Color3.fromRGB(70, 70, 70),
+    GlowColor = Color3.fromRGB(0, 0, 0) -- Initial Glow
+}
+
+-- LOAD LIBRARY
+local UILibrary = loadstring(game:HttpGet("https://pastebin.com/raw/eP21fDqn"))() 
+local MainUI = UILibrary.Load("Advanced Settings UI", StartupTheme)
+
+-- ESP GLOBALS
+_G.ESP_Enabled = true
+_G.ESP_Color = Color3.fromRGB(255, 255, 255)
+
+-- VISUALS PAGE
+local Vis = MainUI.AddPage("Visuals")
+Vis.AddLabel("Main Visuals")
+Vis.AddToggle("ESP", true, function(v) 
+    _G.ESP_Enabled = v 
+end)
+
+-- WORKING ESP BOX COLOR PICKER
+Vis.AddColourPicker("ESP Box Color", Color3.fromRGB(255, 255, 255), function(v)
+    -- This variable 'v' updates live as you move the picker
+    _G.ESP_Color = v
+end)
+
+Vis.AddDropdown("Select Team", {"Allies", "Enemies", "Neutral"}, function(selected) end)
+
+-- SETTINGS PAGE
+local Settings = MainUI.AddPage("Settings")
+
+-- CATEGORY: CORE BINDINGS
+Settings.AddLabel("Core Configuration")
+Settings.AddKeybind("UI Toggle Key", Enum.KeyCode.RightControl, function(newKey)
+    MainUI.SetToggleKey(newKey)
+end)
+
+-- CATEGORY: WINDOW THEME (MANUAL CONTROLS)
+Settings.AddLabel("Window Appearance")
+local p1 = Settings.AddColourPicker("Main Background", MainUI.GetThemeColor("MainBG"), function(v) MainUI.UpdateTheme("MainBG", v) end)
+local p2 = Settings.AddColourPicker("Title Bar", MainUI.GetThemeColor("TitleBarBG"), function(v) MainUI.UpdateTheme("TitleBarBG", v) end)
+local p3 = Settings.AddColourPicker("Text Color", MainUI.GetThemeColor("TextColor"), function(v) MainUI.UpdateTheme("TextColor", v) end)
+local p4 = Settings.AddColourPicker("Menu (Sidebar) BG", MainUI.GetThemeColor("MenuBarBG"), function(v) MainUI.UpdateTheme("MenuBarBG", v) end)
+local p5 = Settings.AddColourPicker("Active Tab Color", MainUI.GetThemeColor("ActiveTab"), function(v) MainUI.UpdateTheme("ActiveTab", v) end)
+local p7 = Settings.AddColourPicker("Element Background", MainUI.GetThemeColor("ElementBG"), function(v) MainUI.UpdateTheme("ElementBG", v) end)
+
+--- THEME PRESETS DROPDOWN ---
+Settings.AddLabel("Visual Presets")
+
+local Themes = {
+    ["Cherry Noir (Valentines)"] = {
+        MainBG = Color3.fromRGB(40, 15, 20),
+        MenuBarBG = Color3.fromRGB(28, 10, 12),
+        DisplayBG = Color3.fromRGB(28, 10, 12),
+        TitleBarBG = Color3.fromRGB(60, 20, 30),
+        ActiveTab = Color3.fromRGB(220, 40, 70),
+        InactiveTab = Color3.fromRGB(40, 15, 20),
+        ElementBG = Color3.fromRGB(55, 22, 28),
+        TextColor = Color3.fromRGB(255, 200, 215),
+        ToggleTrue = Color3.fromRGB(220, 40, 70),
+        SliderFill = Color3.fromRGB(220, 40, 70),
+        GlowColor = Color3.fromRGB(220, 40, 70) 
+    },
+    ["Emerald Forest"] = {
+        MainBG = Color3.fromRGB(15, 25, 20),
+        MenuBarBG = Color3.fromRGB(10, 18, 15),
+        DisplayBG = Color3.fromRGB(10, 18, 15),
+        TitleBarBG = Color3.fromRGB(20, 45, 35),
+        ActiveTab = Color3.fromRGB(40, 200, 120),
+        InactiveTab = Color3.fromRGB(15, 25, 20),
+        ElementBG = Color3.fromRGB(25, 40, 32),
+        TextColor = Color3.fromRGB(200, 255, 220),
+        ToggleTrue = Color3.fromRGB(40, 200, 120),
+        SliderFill = Color3.fromRGB(40, 200, 120),
+        GlowColor = Color3.fromRGB(40, 200, 120) 
+    },
+    ["Oceanic Abyss"] = {
+        MainBG = Color3.fromRGB(15, 20, 30),
+        MenuBarBG = Color3.fromRGB(10, 12, 20),
+        DisplayBG = Color3.fromRGB(10, 12, 20),
+        TitleBarBG = Color3.fromRGB(20, 35, 60),
+        ActiveTab = Color3.fromRGB(0, 160, 255),
+        InactiveTab = Color3.fromRGB(15, 20, 30),
+        ElementBG = Color3.fromRGB(25, 35, 50),
+        TextColor = Color3.fromRGB(210, 240, 255),
+        ToggleTrue = Color3.fromRGB(0, 160, 255),
+        SliderFill = Color3.fromRGB(0, 160, 255),
+        GlowColor = Color3.fromRGB(0, 160, 255) 
+    },
+    ["Amethyst Dream"] = {
+        MainBG = Color3.fromRGB(25, 15, 35),
+        MenuBarBG = Color3.fromRGB(18, 10, 25),
+        DisplayBG = Color3.fromRGB(18, 10, 25),
+        TitleBarBG = Color3.fromRGB(45, 25, 65),
+        ActiveTab = Color3.fromRGB(180, 100, 255),
+        InactiveTab = Color3.fromRGB(25, 15, 35),
+        ElementBG = Color3.fromRGB(40, 25, 55),
+        TextColor = Color3.fromRGB(240, 220, 255),
+        ToggleTrue = Color3.fromRGB(180, 100, 255),
+        SliderFill = Color3.fromRGB(180, 100, 255),
+        GlowColor = Color3.fromRGB(180, 100, 255) 
+    },
+    ["Amber Sunset"] = {
+        MainBG = Color3.fromRGB(35, 25, 15),
+        MenuBarBG = Color3.fromRGB(25, 18, 10),
+        DisplayBG = Color3.fromRGB(25, 18, 10),
+        TitleBarBG = Color3.fromRGB(65, 45, 25),
+        ActiveTab = Color3.fromRGB(255, 160, 50),
+        InactiveTab = Color3.fromRGB(35, 25, 15),
+        ElementBG = Color3.fromRGB(50, 40, 25),
+        TextColor = Color3.fromRGB(255, 240, 210),
+        ToggleTrue = Color3.fromRGB(255, 160, 50),
+        SliderFill = Color3.fromRGB(255, 160, 50),
+        GlowColor = Color3.fromRGB(255, 160, 50) 
+    }
+}
+
+local pglow
+
+Settings.AddDropdown("Select Theme", {"Cherry Noir (Valentines)", "Emerald Forest", "Oceanic Abyss", "Amethyst Dream", "Amber Sunset"}, function(choice)
+    local theme = Themes[choice]
+    for key, color in pairs(theme) do
+        MainUI.UpdateTheme(key, color)
+    end
+    p1.Set(theme.MainBG)
+    p4.Set(theme.MenuBarBG)
+    p5.Set(theme.ActiveTab)
+    p3.Set(theme.TextColor)
+    p7.Set(theme.ElementBG)
+    if pglow then pglow.Set(theme.GlowColor) end
+end)
+
+Settings.AddButton("Reset to Default", function()
+    local d = StartupTheme
+    for key, color in pairs(d) do
+        MainUI.UpdateTheme(key, color)
+    end
+    p1.Set(d.MainBG)
+    p2.Set(d.TitleBarBG)
+    p3.Set(d.TextColor)
+    p4.Set(d.MenuBarBG)
+    p5.Set(d.ActiveTab)
+    p7.Set(d.ElementBG)
+    if pglow then pglow.Set(d.GlowColor) end
+end)
+
+-- PLAYER MODS PAGE
+local PlayerPage = MainUI.AddPage("Player")
+PlayerPage.AddLabel("Character Modifications")
+PlayerPage.AddSlider("WalkSpeed", {Min = 16, Max = 300, Default = 16}, function(v)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
+end)
+PlayerPage.AddSlider("JumpPower", {Min = 50, Max = 500, Default = 50}, function(v)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = v
+end)
+
+-- PLAYER LIST DROPDOWN (AUTO-UPDATING)
+local PlayerListTable = {}
+
+local function RefreshTable()
+    table.clear(PlayerListTable)
+    for _, p in pairs(game.Players:GetPlayers()) do
+        table.insert(PlayerListTable, p.Name)
+    end
+end
+
+-- Initial Fill
+RefreshTable()
+
+-- Create Dropdown
+local pListDropdown = PlayerPage.AddDropdown("Player List", PlayerListTable, function(selected)
+    print("Targeted: " .. selected)
+end)
+
+-- Connect logic for Joining/Leaving using .Refresh
+game.Players.PlayerAdded:Connect(function()
+    RefreshTable()
+    pListDropdown:Refresh(PlayerListTable, true)
+end)
+
+game.Players.PlayerRemoving:Connect(function()
+    RefreshTable()
+    pListDropdown:Refresh(PlayerListTable, true)
+end)
+
+-- EXTRA VISUAL SETTINGS
+Settings.AddLabel("Extra Visuals")
+pglow = Settings.AddColourPicker("Glow Color", MainUI.GetThemeColor("GlowColor"), function(v) 
+    MainUI.UpdateTheme("GlowColor", v) 
+end)
+Settings.AddToggle("Responsive Resizing", false, function(v)
+    MainUI.SetDynamicScaling(v)
+end)
+
+--- ESP BOX RENDERER ---
+local function CreateESP(plr)
+    local Box = Drawing.new("Square")
+    Box.Visible = false
+    Box.Color = _G.ESP_Color
+    Box.Thickness = 1
+    Box.Transparency = 1
+    Box.Filled = false
+
+    local conn
+    conn = game:GetService("RunService").RenderStepped:Connect(function()
+        if plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") and _G.ESP_Enabled and plr ~= game.Players.LocalPlayer then
+            local RootPart = plr.Character.HumanoidRootPart
+            local Vector, onScreen = game.Workspace.CurrentCamera:WorldToViewportPoint(RootPart.Position)
+
+            if onScreen then
+                local Size = Vector2.new(1000 / Vector.Z, 1500 / Vector.Z)
+                Box.Size = Size
+                Box.Position = Vector2.new(Vector.X - Size.X / 2, Vector.Y - Size.Y / 2)
+                Box.Color = _G.ESP_Color
+                Box.Visible = true
+            else
+                Box.Visible = false
+            end
+        else
+            Box.Visible = false
+            if not plr.Parent then
+                Box:Remove()
+                conn:Disconnect()
+            end
+        end
+    end)
+end
+
+for _, p in pairs(game.Players:GetPlayers()) do CreateESP(p) end
+game.Players.PlayerAdded:Connect(CreateESP)
