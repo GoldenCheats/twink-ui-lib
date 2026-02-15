@@ -14,7 +14,7 @@ local StartupTheme = {
 }
 
 -- LOAD LIBRARY
-local UILibrary = loadstring(game:HttpGet("https://pastebin.com/raw/eP21fDqn"))() 
+local UILibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/GoldenCheats/twink-ui-lib/refs/heads/main/ui%20lib%20source"))() 
 local MainUI = UILibrary.Load("Advanced Settings UI", StartupTheme)
 
 -- ESP GLOBALS
